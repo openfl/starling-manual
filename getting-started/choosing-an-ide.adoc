@@ -1,0 +1,62 @@
+== Choosing an IDE
+ifndef::imagesdir[:imagesdir: ../img]
+
+As you have just read, Starling apps and games are built using https://openfl.org[_OpenFL_].
+Technically, you could just use a text editor and the command line to compile and deploy your code, but that's not recommended.
+Instead, you'll definitely want to use an integrated development environment (_IDE_).
+That will make debugging, refactoring and deployment much easier.
+Thankfully, there are several to choose from with plug-ins or extensions for the Haxe programming language.
+Let's look at all the candidates!
+
+=== Visual Studio Code
+
+_Visual Studio Code_ is a lightweight but powerful code editor that's available for all major desktop operating systems.
+It is popular with the community and is considered to be one of the best choices for Starling development.
+
+The https://marketplace.visualstudio.com/items?itemName=nadako.vshaxe[VSHaxe] extension is developed officially by the Haxe Foundation itself.
+It turns Visual Studio Code into a full-fledged Haxe development environment, including code intelligence features like auto-completion, automatic class imports, comfortable debugging, etc.
+
+The https://marketplace.visualstudio.com/items?itemName=openfl.lime-vscode-extension[Lime] extension is developed by the same team that maintains the https://openfl.org[OpenFL] library.
+The Lime extension actually works with the _VSHaxe_ extension to add support for OpenFL and Starling projects, which use a special https://lime.openfl.org/docs/project-files/xml-format/[_project.xml_] file format to configure options.
+
+[horizontal]
+Platforms:: Windows, macOS, and Linux.
+Price:: Free and open source.
+
+=== Sublime Text
+
+_Sublime Text_ is powerful cross-platform text editor that is significantly lighter than some of the other available options. It's code completion may not always be accurate, and its project management features are minimal. However, if other IDEs feel too heavy, _Sublime Text_ will be a breath of fresh air.
+
+The https://github.com/clemos/haxe-sublime-bundle[Haxe Sublime Bundle] adds support for the Haxe programming language, including OpenFL projects using Starling.
+
+[horizontal]
+Platforms:: Windows, macOS, and Linux.
+Price:: Free to try, requires one-time payment for continued use.
+
+=== IntelliJ IDEA
+
+The next candidate might be called "the IDE to rule them all", because _IntelliJ IDEA_ supports a plethora of languages and platforms.
+Its powerful refactoring features are especially nice.
+
+The https://plugins.jetbrains.com/plugin/6873?pr=idea[Haxe plug-in] is developed by the community to add support for the Haxe programming language, including OpenFL projects using Starling.
+
+This plug-in may be used with both the paid "Ultimate" version of _IDEA_ and the free "Community edition".
+
+[horizontal]
+Platforms:: Windows, macOS, Linux.
+Price:: Free for community edition, or paid subscription for full "Ultimate" edition.
+
+TIP: The subscription model contains a so-called "perpetual fallback license", which means that after 12 months, you'll be able to keep a version of IDEA even if you cancel the subscription.
+Personally, I think this mitigates the downsides of the subscription model.
+
+=== Adobe Animate
+
+If you're a designer or a developer who used Flash before OpenFL, you might wonder where _Adobe Animate_ (formerly _Adobe Flash Professional_) is coming up in this list.
+Well, here it is!
+While once focused on Flash only, _Animate_ is a general-purpose animation tool, supporting output to many formats (not only to Flash, but also _HTML5_, _WebGL_, and _SVG_ formats).
+
+For OpenFL and Starling projects, _Animate_ is best used for designing graphics, while writing code in one of the other mentioned IDEs. You can export texture atlases and sprite sheets for Starling, and you can export Flash _.swf_ files containing vector graphics without code, and then import those graphics as assets for OpenFL using the https://github.com/openfl/swf[swf haxelib].
+
+[horizontal]
+Platforms:: Windows, macOS.
+Price:: Requires a Creative Cloud subscription.

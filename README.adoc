@@ -1,0 +1,31 @@
+= The Starling Manual for OpenFL
+Daniel Sperl <https://www.gamua.com[Gamua]>
+:doctype: book
+:toc: left
+:sectnums:
+:sectanchors:
+:icons: font
+:source-highlighter: rouge
+:imagesdir: ../img
+:experimental:
+:autofit-option:
+:target-manual:
+ifndef::ebook-format[:leveloffset: 1]
+
+// introduction
+
+The goal of this manual is to provide an extensive introduction to the https://github.com/openfl/starling[Starling Framework].
+Starling is a cross-platform engine for https://openfl.org[_OpenFL_] and the https://haxe.org[_Haxe programming language_] that can be used for all kinds of applications, with a special focus on 2D games.
+
+In this guide, you will learn:
+
+* The technologies Starling was built upon and the principles it follows.
+* How to pick an IDE and set it up for your first project.
+* The basic concepts like the display list, events and the animation system.
+* Advanced techniques, like how to tap into the potential of fragment and vertex programs.
+* How to get the best performance out of the framework.
+* What's required to get your game to run on mobile phones and tablets.
+
+Keep on reading to dive right into it!
+
+_Adapted from "The Starling Manual" by Daniel Sperl, used under CC-BY-SA_

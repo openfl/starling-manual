@@ -1,0 +1,7 @@
+== Summary
+
+You are now familiar with all the basic concepts of the Starling Framework.
+This is all the knowledge you need to get started with that game you have in your head, or with that app that's waiting to be created.
+
+On the other hand, there are still a few tricks up the sleeves of our little bird (birds have sleeves?).
+If you're ready to jump into those advanced topics, please follow my lead.

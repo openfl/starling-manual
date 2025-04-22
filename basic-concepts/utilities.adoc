@@ -1,0 +1,125 @@
+== Utilities
+
+The `starling.utils` package contains several useful little helpers that shouldn't be overlooked.
+
+=== Colors
+
+In both conventional OpenFL and Starling, colors are specified in hexadecimal format.
+Here are a few examples:
+
+[source, haxe]
+----
+// format:         0xRRGGBB
+var red:Float   = 0xff0000;
+var green:Float = 0x00ff00; // or 0xff00
+var blue:Float  = 0x0000ff; // or 0xff
+var white:Float = 0xffffff;
+var black:Float = 0x000000; // or simply 0
+----
+
+The Color class contains a list of named color values; furthermore, you can use it to easily access the components of a color.
+
+[source, haxe]
+----
+var purple:UInt = Color.PURPLE; // <1>
+var lime:UInt   = Color.LIME;
+var yellow:UInt = Color.YELLOW;
+
+var color:UInt = Color.rgb(64, 128, 192); // <2>
+
+var red:Int   = Color.getRed(color);   // ->  64 <3>
+var green:Int = Color.getGreen(color); // -> 128
+var blue:Int  = Color.getBlue(color);  // -> 192
+----
+<1> A few common colors are predefined.
+<2> Any other color can be created with this method. Just pass the RGB values to this method (range: 0 - 255).
+<3> You can also extract the integer value of each channel.
+
+=== Angles
+
+Starling expects all angles in radians (different to OpenFL, which uses degrees in some places and radians in others).
+To convert between degrees and radians, you can use the following simple functions defined on the `MathUtil` class.
+
+[source, haxe]
+----
+var degrees:Float = MathUtil.rad2deg(Math.PI); // -> 180
+var radians:Float = MathUtil.deg2rad(180);     // -> PI
+----
+
+=== StringUtil
+
+You can use the `format` method to format Strings in _.Net/C#_ style.
+
+[source, haxe]
+----
+StringUtil.format("{0} plus {1} equals {2}", 4, 3, "seven");
+  // -> "4 plus 3 equals seven"
+----
+
+The same class also contains methods that trim whitespace from the start and end of a string -- a frequent operation whenever you need to process user input.
+
+[source, haxe]
+----
+StringUtil.trim("  hello world\n"); // -> "hello world"
+----
+
+=== SystemUtil
+
+It's often useful to find out information about the environment an app or game is currently executed in.
+The _SystemUtil_ contains some methods and properties helping with that task.
+
+[source, haxe]
+----
+SystemUtil.isDesktop; // desktop or mobile?
+SystemUtil.isApplicationActive; // in use or minimized?
+SystemUtil.platform; // WIN, MAC, LNX, IOS, AND
+----
+
+=== MathUtil
+
+While that class is mainly designed to help with some geometric problems, it also contains some very useful helper methods for common mathemetical calculations:
+
+[source, haxe]
+----
+var inside:Float = MathUtil.clamp(-5, 1, 10); // <1>
+----
+<1> Move the number (first argument) into a specific range. Result: `1`
+
+=== Pooling
+
+Now that we touched the topic of temporary objects, it's the perfect time to introduce you to the _Pool_ class.
+
+Experienced AS3 developers know that any object allocation comes at a price: the object needs to be garbage collected later.
+This happens completely behind the scenes; you won't even notice it most of the time.
+
+However, when the cleanup process takes up too much time, your app will freeze for a short moment.
+If that happens often, it quickly becomes a nuisance to your users.
+
+One tactic to avoid this problem is to recycle your objects and use them repeatedly.
+For example, classes like _Point_ and _Rectangle_ are often just needed for a short moment: you create them, fill them with some data, and then throw them away.
+
+From now on, let Starling's _Pool_ class handle those objects.
+
+[source, haxe]
+----
+var point:Point = Pool.getPoint(); // <1>
+doSomethingWithPoint(point);
+Pool.putPoint(point); // <2>
+
+var rect:Rectangle = Pool.getRectangle(); // <1>
+doSomethingWithRectangle(rect);
+Pool.putRectangle(rect); // <2>
+----
+<1> Get an object from the pool. That replaces calling `new` on the class.
+<2> Put it back into the pool when you do not need it any longer.
+
+The class also supports _Vector3D_, _Matrix_, and _Matrix3D_, in a similar style.
+
+IMPORTANT: Always make sure that the _get_ and _put_-calls are balanced.
+If you put too many objects into the pool and never retrieve them, it will fill up over time, using more and more memory.
+
+=== Furthermore ...
+
+The `starling.utils` package contains more helpers than I can possibly list here.
+For a complete list of methods and classes, refer to the https://openfl.org/starling/api/starling/utils/index.html[API Reference].
+It will definitely pay off to take a look!

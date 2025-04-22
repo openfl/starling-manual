@@ -1,0 +1,8 @@
+== Summary
+
+Make no mistake: developing for mobile platforms is not easy.
+The variety of the hardware makes it necessary to plan ahead and structure your code smartly.
+Furthermore, the market is extremely competitive, so your design needs to stand out from the masses.
+
+Starling does what it can to help you with this process!
+With the tools you learned in this chapter, you will be able to master this challenge.

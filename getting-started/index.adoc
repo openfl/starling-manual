@@ -1,0 +1,6 @@
+= Getting Started
+
+This chapter will provide you with an overview of Starling and the technologies it builds upon.
+We will first take a brief look at the history of https://openfl.org[_OpenFL_] and how Starling came into being.
+Then, we will evaluate the tools and resources that will help you when working with Starling.
+At the end of the chapter, you will have your first "Hello World" example up and running.

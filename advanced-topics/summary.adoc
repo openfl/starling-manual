@@ -1,0 +1,13 @@
+== Summary
+
+Pat yourself on the back: we just covered a lot of quite advanced topics.
+
+* You are now familiar with ATF textures, which are not only very memory efficient, but load faster than standard PNGs.
+* You know how to recover from a context loss: by relying on the _AssetManager_ or providing your own restoration-code.
+* You've got a feeling about how to make sure you are not wasting any memory, and how to avoid and find memory leaks.
+* When performance becomes an issue, your first look is at the draw count. You know ways to make sure batching is not disrupted.
+* The low-level rendering code is far less frightening that you thought at first. Heck, you even wrote your own filter and style!
+* Distance field rendering is a useful technique to keep in mind for scalable fonts or other monochrome shapes.
+
+This knowledge will save you a lot of time and trouble in any of your upcoming projects.
+And I bet some of them are going to have to run on mobile hardware, right ...?

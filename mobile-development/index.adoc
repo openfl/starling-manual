@@ -1,0 +1,10 @@
+= Mobile Development
+
+_OpenFL_ is one of the most powerful solutions available today when it comes to cross-platform development.
+And when somebody says "cross-platform" nowadays, it typically includes both _iOS_ and _Android_.
+
+Developing for such mobile platforms can be extremely challenging -- there's a plethora of different device types around, featuring screen resolutions that range from _insult to the eye_ to _insanely high_ and aspect ratios that defy any logic.
+To add insult to injury, some of them are equipped with CPUs that clearly were never meant to power anything else than a pocket calculator.
+
+As a developer, you can only shrug your shoulders, roll up your sleeves, and jump right in.
+At least you know that fame and fortune lie on the other side of the journey!footnote:[Don't pin me down to that, though.]

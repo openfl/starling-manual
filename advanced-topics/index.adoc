@@ -1,0 +1,13 @@
+= Advanced Topics
+
+With all the things we learned in the previous chapters, you are already well equipped to start using Starling in real projects.
+However, while doing so, you might run into a few things that might be puzzling.
+For example,
+
+* your textures are quickly consuming all available memory.
+* you are encountering a _context loss_ from time to time. WTF!?footnote:[My editor said it's not polite to swear, but (1) I used an acronym and (2) context loss really s*cks.]
+* you are actually a little disappointed by the performance of your application. You want more speed!
+* or you might be one of those masochists who likes to write their own vertex and fragment shaders, but didn't know where to start.
+
+Oddly enough, that perfectly summarizes what this chapter is about.
+Buckle up Dorothy, we are now jumping into some advanced topics!

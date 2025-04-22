@@ -1,0 +1,24 @@
+
+// conclusion
+
+:leveloffset: 0
+
+== Final Words
+ifndef::imagesdir[:imagesdir: ../img]
+
+=== Achievement Unlocked!
+
+You have successfully finished working through the _Starling Manual_.
+We covered a lot of ground, didn't we?
+Pat yourself on the back and shave off that beard you've grown during the last hours.
+
+Congratulations!
+
+image::impressive.jpg[Impressive]
+
+=== Getting Help
+
+Want to share the knowledge you have just acquired?
+Or do you have any questions that haven't been answered yet?
+The Starling community is eager to help you!
+Pay us a visit at the official https://forum.starling-framework.org/t/starling-haxe[Starling Forum].

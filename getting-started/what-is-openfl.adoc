@@ -1,0 +1,28 @@
+== What is OpenFL?
+ifndef::imagesdir[:imagesdir: ../img]
+
+_OpenFL_ is a toolkit for creating games, cross-platform apps, and multimedia experiences. It brings the powerful capabilities of _Adobe Flash Player_ into the modern age by providing an all new implementation that runs on devices of all kinds, including native apps on smartphones, tablets, and desktop computers. It even runs in web browsers — without requiring a special plug-in.
+
+Not all that long ago, Adobe's _Flash Player_ was omnipresent when browsing the web.
+At that time, it was basically the only choice when you wanted to create interactive or animated content for the web.
+Browsers had very limited capabilities when it came to video, sound, and animation; and the few features they had were plagued by browser incompatibilities.
+In short, it was a mess.
+
+Over time, JavaScript, HTML, and CSS evolved, and web browsers now offer many of the capabilities that were once only available with _Flash Player_.
+
+Yet, something still feels missing. There was a certain magic to Flash's animation capabilities, and Flash's core APIs like the _display list_ felt much more intuitive and well-designed compared to the HTML DOM and other JavaScript APIs that were designed by committee. 
+
+_OpenFL_ aims to keep the creative spirit of _Flash_ alive! It has a vibrant community, dedicated and responsive maintainers, and a very bright future ahead.
+
+Granted, it may not be the "cool kid" in town, but _OpenFL_ is an extremely attractive platform to build software with:
+
+* Compared to the fragmented world of _JavaScript_ and _HTML_, where trending libraries change faster than Lady Gaga's costumes, it is very mature and easy to use.
+* OpenFL and Haxe come with an extensive standard library that provides all the tools you need for day-to-day development.
+* Native extension support allows you to write C or C++ code to access native APIs and expose them to Haxe.
+* Especially combined with _Starling_ and _Feathers_, OpenFL provides one of the smoothest paths for true cross-platform development (targeting all major desktop and mobile platforms with a single code-base).
+
+Talking about _Starling_ ... how does it fit into this picture? Keep reading...
+
+TIP: When it comes to software development, don't fall into the trap of blindly following the masses.
+For every problem, there are multiple solutions; some of them better suited than others.
+Pick the tool you are most comfortable with; a tool that gets out of your way and lets you focus on the software you want to create.

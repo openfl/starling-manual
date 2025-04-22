@@ -1,0 +1,16 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: |
+          npx honkit build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: starling-manual
+          path: _book
+          if-no-files-found: error

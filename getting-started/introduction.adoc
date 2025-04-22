@@ -1,0 +1,20 @@
+== Introduction
+
+First of all: welcome to the Starling community!
+Since its first release in 2011, developers from all over the world have created amazing games and apps with the help of the little red bird.
+It's great you want to join us!
+
+You have come to the right place: this manual will teach all you need to know.
+We'll cover everything from 'A' like _Asset Management_ to 'Z' like, ehm, _Zen-like coding_.
+
+I will start from scratch, beginning with a small game that will give you a feeling for the framework.
+Then we'll look at all the concepts in detail, including the display list architecture and Starling's animation system.
+Later chapters contain information for advanced Starling users, like how to write custom rendering code.
+Before you know it, you'll be a master of Starling!
+
+However, there is one small precondition: you should have a basic understanding of the _Haxe_ programming language.
+Fear not: if you have used any other object oriented language, you will get the hang of it quickly.
+There are numerous books and tutorials available that will get you started.
+
+However, you don't need to have prior experience with _OpenFL_ before getting started with Starling.
+There is some basic foundational _OpenFL_ code to bootstrap a Starling project, but it is minimal and will include appropriate explanation.
