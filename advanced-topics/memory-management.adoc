@@ -67,7 +67,7 @@ Here's the first pitfall: disposing an image will _not_ dispose its texture.
 
 [source, haxe]
 ----
-var texture:Texture = Texture.fromBitmap(/* ... */);
+var texture:Texture = Texture.fromBitmapData(/* ... */);
 var image:Image = new Image(texture);
 
 image.dispose(); // will NOT dispose texture!
@@ -143,7 +143,7 @@ var appDir:File = File.applicationDirectory;
 var assets:AssetManager = new AssetManager();
 
 assets.enqueue(appDir.resolvePath("assets/textures"));
-assets.loadQueue(...);
+assets.loadQueue(/* ... */);
 
 var texture:Texture = assets.getTexture("hero");
 ----

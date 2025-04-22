@@ -150,7 +150,7 @@ var appDir:File = File.applicationDirectory;
 
 assetManager.textureOptions.scale = scale; // <3>
 assetManager.enqueue(appDir.resolvePath(texturePath));
-assetManager.loadQueue(...);
+assetManager.loadQueue(/* ... */);
 
 var texture:Texture = assetManager.getTexture("penguin"); // <4>
 trace(texture.scale); // → Either '1' or '2' <5>
@@ -583,7 +583,7 @@ var appDir:File = File.applicationDirectory;
 
 assetManager.textureOptions.scale = scale;
 assetManager.enqueue(appDir.resolvePath(texturePath));
-assetManager.loadQueue(...);
+assetManager.loadQueue(/* ... */);
 ----
 
 That's it!
