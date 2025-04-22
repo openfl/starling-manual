@@ -8,7 +8,7 @@
 .. link:getting-started/resources.adoc[Resources]
 .. link:getting-started/hello-world.adoc[Hello World]
 .. link:getting-started/summary.adoc[Summary]
-. linkbasic-concepts/index.adoc[Basic Concepts]
+. link:basic-concepts/index.adoc[Basic Concepts]
 .. link:basic-concepts/configuring-starling.adoc[Configuring Starling]
 .. link:basic-concepts/display-programming.adoc[Display Programming]
 .. link:basic-concepts/textures-and-images.adoc[Textures & Images]
