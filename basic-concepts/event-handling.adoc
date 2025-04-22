@@ -70,17 +70,7 @@ In other words: the button needs to be able to send messages to its owner, whoev
 
 I have something to confess: when I showed you the class hierarchy of Starling's display objects, I omitted the actual base class: _EventDispatcher_.
 
-[plantuml, class-hierarchy-with-eventdispatcher, width=298, pdfwidth='6.12cm', scaledwidth='298px']
-....
-include::../defaults.plantuml[]
-
-abstract class DisplayObject
-abstract class DisplayObjectContainer
-
-EventDispatcher <|-- DisplayObject
-DisplayObject <|-- Mesh
-DisplayObject <|-- DisplayObjectContainer
-....
+image::class-hierarchy-with-eventdispatcher.png['EventDispatcher <|-- DisplayObject, DisplayObject <|-- Mesh, DisplayObject <|-- DisplayObjectContainer', 298, pdfwidth='6.12cm', scaledwidth='298px']
 
 This class equips all display objects with the means to dispatch and handle events.
 It's not a coincidence that all display objects inherit from _EventDispatcher_; in Starling, the event system is tightly integrated with the display list.

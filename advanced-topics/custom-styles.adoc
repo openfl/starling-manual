@@ -286,13 +286,7 @@ This time, we're going to extend the _MeshEffect_ class.
 Remember, effects simplify writing of low-level rendering code.
 I'm actually talking about a group of classes with the following inheritance:
 
-[plantuml, effect-classes, width=118, pdfwidth='2.43cm', scaledwidth='118px']
-....
-include::../defaults.plantuml[]
-
-Effect <|-- FilterEffect
-FilterEffect <|-- MeshEffect
-....
+image::effect-classes.png['Effect <|-- FilterEffect, FilterEffect <|-- MeshEffect', 118, pdfwidth='2.43cm', scaledwidth='118px']
 
 The base class (_Effect_) does only the absolute minimum: it draws white triangles.
 The _FilterEffect_ adds support for textures, and the _MeshEffect_ for color and alpha.

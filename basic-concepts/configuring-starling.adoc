@@ -7,7 +7,7 @@ Here is the complete declaration of Starling's constructor:
 [source, haxe]
 ----
 public function new(
-    rootClass:Class,
+    rootClass:Class<Dynamic>,
     stage:Stage,
     viewPort:Rectangle = null,
     stage3D:Stage3D = null,
@@ -17,13 +17,13 @@ public function new(
 
 rootClass:: The class that is instantiated as soon as _Stage3D_ has finished initializing. Must be a subclass of `starling.display.DisplayObject`.
 
-stage:: The traditional OpenFL stage that will host Starling's content. That's how the Starling and OpenFL display list are connected to each other.
+stage:: The traditional OpenFL stage that will host Starling's content. That's how the Starling and OpenFL display list are connected to each other. Must be of type `openfl.display.Stage`.
 
 viewPort:: The area within the OpenFL stage that Starling will render into. Since this is often the full stage size, you can omit this parameter (i.e. pass `null`) to use the full area.
 
 stage3D:: The _Stage3D_ instance used for rendering. Each OpenFL stage may contain several _Stage3D_ instances and you can pick any one of those. However, the default parameter (`null`) will suffice most of the time: this will make Starling use the first available _Stage3D_ object.
 
-renderMode:: The whole idea behind _Stage3D_ is to provide hardware-accelerated rendering. However, there is also a software fallback mode; it may be forced by passing `Context3DRenderMode.SOFTWARE`. The default (`auto`) is recommended, though -- it means that software rendering is used only when there's no alternative.
+renderMode:: The whole idea behind _Stage3D_ is to provide hardware-accelerated rendering. However, there is also a software fallback mode on some targets; if available, it may be forced by passing `Context3DRenderMode.SOFTWARE`. The default (`auto`) is recommended, though -- it means that software rendering is used only when there's no alternative.
 
 profile:: _Stage3D_ provides a set of capabilities that are grouped into different _profiles_ (defined as constants within `Context3DProfile`). The better the hardware the application is running on, the better the available profile. The default (`auto`) simply picks the best available profile.
 
@@ -56,7 +56,7 @@ However, as soon as Starling has finished starting up, the logic is moved over t
 [NOTE]
 .Configuring the Frame Rate
 ====
-Some settings are configured right in the "SWF" _MetaData_ tag in front of the class.
+Some settings are configured in the Lime _project.xml_ configuration file.
 The frame rate is one of them.
 Starling itself does not have an equivalent setting: it always simply uses the _frameRate_ from the native stage.
 To change it at runtime, access the `nativeStage` property:
@@ -91,7 +91,7 @@ private function onRootCreated(event:Event, root:Game):Void
 === The ViewPort
 
 _Stage3D_ provides Starling with a rectangular area to draw into.
-That area can be anywhere within the native stage, which means: anywhere within the area where _OpenFL_ renders its contents (the application window on native targets, or the `<canvas>` element on HTML5).
+That area can be anywhere within the native stage, which means: anywhere within the area where _OpenFL_ renders its contents (the application window on native targets, or the `<canvas>` element when targeting HTML5).
 
 In Starling, that area is called the _viewPort_.
 Most of the time, you will want to use all of the available area, but sometimes it makes sense to limit rendering to a certain region.

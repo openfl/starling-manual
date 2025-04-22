@@ -87,7 +87,7 @@ Now let's compile and run the project. Your IDE may offer its own method of buil
 Congratulations! You have successfully compiled and run your first Starling based project.
 
 .Fantastic: a red Starling in a red box.
-image::hello-world.png["Hello World", pdfwidth='7cm']
+image::hello-world.png['Hello World', pdfwidth='7cm']
 
 Seriously: the most daunting part now lies behind you.
 Finally, we are ready to dig into a real project!

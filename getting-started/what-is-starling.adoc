@@ -6,7 +6,7 @@ The main target is the creation of 2D games, but Starling may be used for any gr
 Thanks to _OpenFL_, Starling-based applications can be deployed to all major mobile and desktop platforms, including the web.
 
 .This red little fella represents the logo of the Starling Framework.
-image::starling-bird.png["The Starling logo."]
+image::starling-bird.png['The Starling logo.']
 
 While Starling mimics the classic display list architecture of _OpenFL_, it provides a much better performance: all objects are rendered directly by the GPU (using the _Stage3D_ API).
 The complete architecture was designed for working well with the GPU; common game development tasks were built right into its core.

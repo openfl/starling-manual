@@ -32,23 +32,7 @@ Other properties modify the way the pixels appear on the screen:
 Those are the basics that every display object must support.
 Let's look at the class hierarchy around this area of Starling's API:
 
-[plantuml, class-hierarchy, width=535, pdfwidth='11cm']
-....
-include::../defaults.plantuml[]
-
-abstract class DisplayObject
-abstract class DisplayObjectContainer
-
-DisplayObject <|-- Mesh
-DisplayObject <|-- DisplayObjectContainer
-DisplayObjectContainer <|-- Stage
-DisplayObjectContainer <|-- Sprite
-DisplayObjectContainer <|-- Button
-DisplayObjectContainer <|-- TextField
-Mesh <|-- Quad
-Quad <|-- Image
-Image <|-- MovieClip
-....
+image::class-hierarchy.png['DisplayObject <|-- Mesh, DisplayObject <|-- DisplayObjectContainer, DisplayObjectContainer <|-- Stage. DisplayObjectContainer <|-- Sprite, DisplayObjectContainer <|-- Button, DisplayObjectContainer <|-- TextField, Mesh <|-- Quad, Quad <|-- Image, Image <|-- MovieClip', 535, pdfwidth='11cm', scaledwidth='535px']
 
 You'll notice that the diagram is split up in two main sub-branches.
 On the one side, there are a couple of classes that extend `Mesh`: `Quad`, `Image`, and `MovieClip`.

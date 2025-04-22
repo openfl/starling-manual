@@ -104,14 +104,7 @@ The easiest way to do that is by using the _Image_ class or one of its cousins.
 
 Let's zoom in on that part of the family tree.
 
-[plantuml, mesh-classes, width=111, pdfwidth='2.28cm', scaledwidth='111px']
-....
-include::../defaults.plantuml[]
-
-Mesh <|-- Quad
-Quad <|-- Image
-Image <|-- MovieClip
-....
+image::mesh-classes.png['Mesh <|-- Quad, Quad <|-- Image, Image <|-- MovieClip', 111, pdfwidth='2.28cm', scaledwidth='111px']
 
 * A _Mesh_ is a flat collection of triangles (remember, the GPU can only draw triangles).
 * A _Quad_ is a collection of at least two triangles spawning up a rectangle.

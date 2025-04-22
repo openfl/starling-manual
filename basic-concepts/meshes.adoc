@@ -9,14 +9,7 @@ In a nutshell, a _Mesh_ represents a list of triangles to be rendered via _Stage
 It was mentioned a few times already, since it's the base class of _Quad_ and _Image_.
 As a reminder, here is the class hierarchy we are talking about:
 
-[plantuml, mesh-classes-from-display-object, width=137, pdfwidth='2.82cm', scaledwidth='137px']
-....
-include::../defaults.plantuml[]
-
-DisplayObject <|-- Mesh
-Mesh <|-- Quad
-Quad <|-- Image
-....
+image::mesh-classes-from-display-object.png['DisplayObject <|-- Mesh, Mesh <|-- Quad, Quad <|-- Image', 137, pdfwidth='2.82cm', scaledwidth='137px']
 
 _Mesh_ is not an abstract class; nothing prevents you from instantiating it directly.
 Here's how:
