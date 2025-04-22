@@ -26,8 +26,8 @@ Other properties modify the way the pixels appear on the screen:
 * `blendMode`: determines how the object's pixels are blended with those underneath.
 * `filter`: special GPU programs (shaders) that modify the look of the object. Filters can e.g. blur the object or add a drop shadow.
 * `mask`: masks cut away all parts that are outside a certain area.
-* `alpha`: the opacity of the object, from `0` (invisible) to `1` (fully opaque).
-* `visible`: if false, the object is hidden completely.
+* `alpha`: the opacity of the object, from `0.0` (invisible) to `1.0` (fully opaque).
+* `visible`: if `false`, the object is hidden completely.
 
 Those are the basics that every display object must support.
 Let's look at the class hierarchy around this area of Starling's API:
@@ -176,12 +176,6 @@ In its constructor, we create everything that makes up the message box:
 ----
 class MessageBox extends DisplayObjectContainer
 {
-    [Embed(source = "background.png")]
-    private static final BackgroundBmp:Class;
-
-    [Embed(source = "button.png")]
-    private static final ButtonBmp:Class;
-
     private var _background:Image;
     private var _textField:TextField;
     private var _yesButton:Button;
@@ -191,8 +185,14 @@ class MessageBox extends DisplayObjectContainer
     {
         super();
 
-        var bgTexture:Texture = Texture.fromEmbeddedAsset(BackgroundBmp);
-        var buttonTexture:Texture = Texture.fromEmbeddedAsset(ButtonBmp);
+        // these bitmap assets should be defined in project.xml
+        // <assets path="assets/msg_bg.png"/>
+        // <assets path="assets/msg_btn.png"/>
+        var bgBmd:BitmapData = Assets.getBitmapData("assets/msg_bg.png");
+        var buttonBmd:BitmapData = Assets.getBitmapData("assets/msg_btn.png");
+
+        var bgTexture:Texture = Texture.fromBitmapData(bgBmd);
+        var buttonTexture:Texture = Texture.fromBitmapData(buttonBmd);
 
         _background = new Image(bgTexture);
         _textField  = new TextField(200, 100, text);
@@ -243,7 +243,7 @@ When you don't dispose that data, it will stay in memory, which means that the a
 
 IMPORTANT: When you dispose a container, all of its children will be disposed, too.
 
-To make things easier, `removeFromParent()` optionally accepts a Bool parameter to dispose the DisplayObject that is being removed.
+To make things easier, `removeFromParent()` optionally accepts a _Bool_ parameter to dispose the DisplayObject that is being removed.
 That way, the code from above can be simplified to this single line:
 
 [source, haxe]

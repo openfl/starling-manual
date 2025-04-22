@@ -268,7 +268,7 @@ Let's say you just created a tween that animates a ball and added it to the defa
 
 [source, haxe]
 ----
-tween:Tween = new Tween(ball, 1.5);
+var tween:Tween = new Tween(ball, 1.5);
 tween.moveTo(x, y);
 Starling.juggler.add(tween);
 ----
@@ -466,8 +466,7 @@ All of the following work really well with Starling:
 
 While _Spine_ is a standalone application (built specifically with game development in mind), the others are all based on _Adobe Animate_ (either via plug-in or by parsing SWF data).
 
-Apropos _Adobe Animate_: a recent update actually added a brand-new export option.
-To use it, right-click on a symbol in the _Library_ panel and choose "Generate Texture Atlas".
+Apropos _Adobe Animate_: Right-click on a symbol in the _Library_ panel and choose "Generate Texture Atlas".
 Don't be fooled by the misleading name: this format has nothing to do with Starling's standard texture atlases.
 It's a completely different format that efficiently describes animations.
 

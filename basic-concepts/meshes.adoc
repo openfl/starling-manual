@@ -264,8 +264,8 @@ The properties and methods of the _Mesh_ class provide a solid foundation -- but
 
 Coming to the rescue: Starling's _mesh styles_.
 
-Styles are a brand new addition to Starling (introduced in version 2.0) and are the recommended way to create custom, high performance rendering code.
-In fact, all rendering in Starling is now done via mesh styles.
+Styles are the recommended way to create custom, high performance rendering code.
+In fact, all rendering in Starling is done via mesh styles.
 
 * A style can be assigned to any mesh (instances of the _Mesh_ class or its subclasses).
 * Per default, the style of each mesh is an instance of the base _MeshStyle_ class.
@@ -279,7 +279,6 @@ For example, you could implement fast color transformations or multi-texturing.
 ====
 One of the most impressive samples of a style is the https://github.com/CrazyFlasher/starling-extensions-hx/tree/master/src/starling/extensions/lighting[Dynamic Lighting extension].
 With the help of a normal map (a texture encoding surface normals), it can provide realistic real-time lighting effects.
-Be sure to check out this extension in the Starling Wiki to see it in action!
 ====
 
 To use a style, instantiate it and assign it to the `style` property of the mesh:

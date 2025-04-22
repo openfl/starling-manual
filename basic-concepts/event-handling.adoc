@@ -1,5 +1,6 @@
 == Event Handling
 ifndef::imagesdir[:imagesdir: ../img]
+:experimental:
 
 You can think of events as occurrences of any kind that are of interest to you as a programmer.
 
@@ -454,7 +455,7 @@ We can base our logic on the length and contents of that vector.
 * In the first _if_-clause, only a single finger is on the screen. Via `getMovement`, we could e.g. implement a drag-gesture.
 * In the _else_-clause, two fingers are on the screen. By accessing both touch objects, we could e.g. implement a pinch-gesture.
 
-NOTE: The demo application that's part of the Starling download contains the https://github.com/Gamua/Starling-Framework/blob/master/samples/demo/src/utils/TouchSheet.as[TouchSheet] class, which is used in the _Multitouch_ scene.
+NOTE: The demo application that's part of the Starling download contains the https://github.com/openfl/starling/blob/master/samples/demo/src/utils/TouchSheet.hx[TouchSheet] class, which is used in the _Multitouch_ scene.
 It shows a sample implementation of a touch handler that allows dragging, rotation and scaling a sprite.
 
 ==== Mouse Out and End Hover

@@ -29,12 +29,12 @@ Thus, such a mask is purely binary: a pixel is either visible, or it is not.
 [IMPORTANT]
 .Masks and Stage3D
 ====
-For masks to work in Stage3D, you will need to activate the stencil buffer in the Lime _project.xml_ configuration file.
+For masks to work in Stage3D, you will need to activate the depth and stencil buffers in the Lime _project.xml_ configuration file.
 Add the following setting to the `window` element:
 
 [source, xml]
 ----
-<window stencil-buffer="true"/>
+<window stencil-buffer="true" depth-buffer="true" />
 ----
 
 But don't worry, Starling will print a warning to the console if you forget to do so.
@@ -106,4 +106,4 @@ Instead of the _stencil buffer_, it will then use the _scissor rectangle_ -- spa
 
 Texture Masks::
 If a simple vector shape just doesn't cut it, there is an extension that allows you to use the alpha channel of a texture as a stencil mask.
-It's called _Texture Mask_ and is found in the https://github.com/CrazyFlasher/starling-extensions-hx/blob/master/src/starling/extensions/TextureMaskStyle.hx[Starling Wiki].
+It's called https://github.com/CrazyFlasher/starling-extensions-hx/blob/master/src/starling/extensions/TextureMaskStyle.hx[_Texture Mask_].

@@ -89,4 +89,4 @@ I created a video tutorial that demonstrates how this feature can be used in a r
 It shows you how to move a 2D game of concentration into the third dimension.
 
 * Watch the video on https://vimeo.com/109564325[Vimeo].
-* Get the complete source code from https://github.com/PrimaryFeather/Memory3D[GitHub].
+* Get the complete source code from https://github.com/PrimaryFeather/Memory3D[GitHub]. (Note: This was written in ActionScript 3.0 for the Flash version of Starling)

@@ -11,7 +11,7 @@ You can't show anybody that file alone: it's all zeros and ones, after all.
 You need an image viewer to look at it, or send it to a printer.
 
 Textures are stored directly in GPU memory, which means that they can be accessed very efficiently during rendering.
-They are typically either created from an embedded class or loaded from a file. You can pick between one of the following file formats:
+They are typically either created from an asset, loaded from a URL, or read from the file system. You can pick between one of the following file formats:
 
 PNG:: The most versatile of them all. Its lossless compression works especially well for images with large areas of solid color. Recommended as default texture format.
 
@@ -36,50 +36,25 @@ class Texture
 }
 ----
 
-Probably the most common task is to create a texture from a bitmap.
+Probably the most common task is to create a texture from bitmap data.
 That couldn't be easier:
 
 [source, haxe]
 ----
-var bitmap:Bitmap = getBitmap();
-var texture:Texture = Texture.fromBitmap(bitmap);
+var bmd:BitmapData = getBitmapData();
+var texture:Texture = Texture.fromBitmapData(bmd);
 ----
 
-It's also very common to create a texture from an embedded bitmap.
+It's also very common to create a texture from an asset.
 That can be done in just the same way:
 
 [source, haxe]
 ----
-[Embed(source="mushroom.png")] // <1>
-public static final Mushroom:Class;
-
-var bitmap:Bitmap = new Mushroom(); // <2>
-var texture:Texture = Texture.fromBitmap(bitmap); // <3>
+var bmd:BitmapData = Assets.getBitmapData("assets/mushroom.png"); // <1>
+var texture:Texture = Texture.fromBitmapData(bmd); // <2>
 ----
-<1> Embed the bitmap.
-<2> Instantiate the bitmap.
-<3> Create a texture from the bitmap.
-
-However, there is a shortcut that simplifies this further:
-
-[source, haxe]
-----
-[Embed(source="mushroom.png")] // <1>
-public static final Mushroom:Class;
-
-var texture:Texture = Texture.fromEmbeddedAsset(Mushroom); // <2>
-----
-<1> Embed the bitmap.
-<2> Create a texture right from the class storing the embedded asset.
-
-[IMPORTANT]
-.Pro Tip
-====
-This is not only less code, but it will also require less memory!
-
-The `fromEmbeddedAsset` method does some behind-the-scenes magic to guard for a context loss, and does it more efficiently than the conventional `fromBitmap` method can do.
-We will come back to this topic later, but for now, just remember that this is the preferred way of creating a texture from an embedded bitmap.
-====
+<1> The asset is defined in _project.xml_: `<assets path="assets/mushroom.png"/>`
+<2> Create a texture from the bitmap data.
 
 Another feature of the _Texture_ class is hidden in the inconspicuous `fromTexture` method.
 It allows you to set up a texture that points to an area within another texture.
@@ -118,7 +93,7 @@ To demonstrate, let me show you how to display a texture with a _Quad_ vs. an _I
 
 [source, haxe]
 ----
-var texture:Texture = Texture.fromBitmap(...);
+var texture:Texture = Texture.fromBitmapData(/* ... */);
 
 var quad:Quad = new Quad(texture.width, texture.height); // <1>
 quad.texture = texture;
@@ -144,12 +119,12 @@ In fact, that's exactly what you should do: load a texture only once and then re
 [source, haxe]
 ----
 // do NOT do this!!
-var image1:Image = new Image(Texture.fromEmbeddedAsset(Mushroom));
-var image2:Image = new Image(Texture.fromEmbeddedAsset(Mushroom));
-var image3:Image = new Image(Texture.fromEmbeddedAsset(Mushroom));
+var image1:Image = new Image(Texture.fromBitmapData(bmd));
+var image2:Image = new Image(Texture.fromBitmapData(bmd));
+var image3:Image = new Image(Texture.fromBitmapData(bmd));
 
 // instead, create the texture once and keep a reference:
-var texture:Texture = Texture.fromEmbeddedAsset(Mushroom));
+var texture:Texture = Texture.fromBitmapData(bmd);
 var image1:Image = new Image(texture);
 var image2:Image = new Image(texture);
 var image3:Image = new Image(texture);
@@ -209,16 +184,13 @@ Okay: you've got a texture atlas now.
 But how do you use it?
 Let's start with embedding the texture and XML data.
 
-[source, haxe]
+[source, xml]
 ----
-[Embed(source="atlas.xml", mimeType="application/octet-stream")] // <1>
-public static final AtlasXml:Class;
-
-[Embed(source="atlas.png")] // <2>
-public static final AtlasTexture:Class;
+<assets path="assets/atlas.xml"/> <!--1-->
+<assets path="assets/atlas.png"/> <!--2-->
 ----
-<1> Embed the atlas XML. Don't forget to specify the _mimeType_.
-<2> Embed the atlas texture.
+<1> Add the atlas XML as an asset.
+<2> Add the atlas texture as an asset.
 
 NOTE: Alternatively, you can also load these files from an URL or from the disk (if we are talking about native targets).
 We will look at that in detail when we discuss Starling's _AssetManager_.
@@ -228,8 +200,12 @@ Create the atlas object once when the game is initialized and reference it throu
 
 [source, haxe]
 ----
-var texture:Texture = Texture.fromEmbeddedAsset(AtlasTexture); // <1>
-var xml:XML = XML(new AtlasXml());
+var bitmapData:BitmapData = Assets.getBitmapData("assets/atlas.png");
+var texture:Texture = Texture.fromBitmapData(bitmapData); // <1>
+
+var xmlString:String = Assets.getText("assets/atlas.xml");
+var xml:Xml = Xml.parse(xmlString);
+
 var atlas:TextureAtlas = new TextureAtlas(texture, xml);
 
 var moonTexture:Texture = atlas.getTexture("moon"); // <2>

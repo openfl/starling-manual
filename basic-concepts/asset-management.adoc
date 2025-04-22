@@ -6,7 +6,7 @@ But that's not all: you will probably need to deal with sounds and configuration
 
 For referencing these assets, you've got several choices.
 
-* Embed them right inside the application (via the `[Embed]` meta data).
+* Add them to the Lime _project.xml_ file (via the `<assets>` tag).
 * Load them from disk (only possible for native applications).
 * Load them from an URL, e.g. from a webserver.
 
@@ -87,6 +87,9 @@ assets.enqueue(appDir.resolvePath("fonts/desyrel.fnt"));
 assets.enqueue(appDir.resolvePath("fonts/desyrel.png"));
 ----
 
+////
+TODO: does it make sense to keep this?
+because OpenFL doesn't have the same [Embed] mechanism as Flash
 ==== Assets that are embedded
 
 For embedded assets, I recommend you put all the embed statements into one dedicated class.
@@ -130,6 +133,7 @@ var assets:AssetManager = new AssetManager();
 assets.enqueue(EmbeddedAssets); // <1>
 ----
 <1> Enqueues `bird` texture, `explosion` sound, and a texture atlas.
+////
 
 ==== Per-Asset Configuration
 

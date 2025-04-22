@@ -35,37 +35,25 @@ For example, if you set up your TextField to use "Arial", it will use the one in
 
 However, the rendering quality of that approach is not optimal; for example, the font might be rendered without anti-aliasing.
 
-For a better output, you should embed your _TrueType_ fonts directly into the SWF file.
+For a better output, you should embed your _TrueType_ fonts as assets in your _project.xml_ configuration file.
 Use the following code to do that:
 
-[source, haxe]
+[source, xml]
 ----
-[Embed(source="Arial.ttf", embedAsCFF="false", fontFamily="Arial")]
-private static final Arial:Class; // <1>
-
-[Embed(source="Arial Bold.ttf", embedAsCFF="false", fontFamily="Arial", fontWeight="bold")]
-private static final ArialBold:Class; // <2>
-
-[Embed(source="Arial Italic.ttf", embedAsCFF="false", fontFamily="Arial", fontStyle="italic")]
-private static final ArialItalic:Class; // <3>
-
-[Embed(source="Arial.ttf", embedAsCFF="false", fontFamily="Arial", unicodeRange = "U+0020-U+007e")]
-private static final ArialJustLatin:Class; // <4>
+<assets path="fonts/Arial.ttf"/> <!--1-->
+<assets path="fonts/Arial Bold.ttf"/>
+<assets path="fonts/Arial Italic.ttf"/> <!--2-->
 ----
-<1> Embedding the standard _Arial_ font. Note the _embedAsCFF_ part: don't skip it! Otherwise, the font simply won't show up.
-<2> Bold and italic styles must be embedded separately. Note the _fontWeight_ attribute here,
-<3> and the _fontStyle_ attribute here.
-<4> You can also define which glyphs to include, which is useful for big fonts when you don't need all _Unicode_ letters.
-    The range shown here is for basic Latin (upper- and lowercase chars, numerals and common symbols/punctuations).
+<1> Embedding the standard _Arial_ font.
+<2> Bold and italic styles must be embedded separately.
 
 After embedding the font, any TextField that is set up with a corresponding font name (font family) and weight will use it automatically.
 There's nothing else to set up or configure.
 
 TIP: Beware of the big footprint when embedding all glyphs of a font.
-The "unicodeRange" shown above mitigates this problem.
 
 TIP: If your text is clipped or does not appear at the correct position, have a look at your current `stage.quality` setting.
-A low quality value may causes OpenFL to report incorrect values regarding the text bounds, and Starling depends on those values when it draws the text.
+A low quality value may cause OpenFL to report incorrect values regarding the text bounds, and Starling depends on those values when it draws the text.
 (I'm talking about the OpenFL stage here; and this applies only to TrueType fonts.)
 
 === Bitmap Fonts
@@ -99,14 +87,14 @@ To make such a font available to Starling, you can embed it in the SWF and regis
 
 [source, haxe]
 ----
-[Embed(source="font.png")]
-public static final FontTexture:Class;
+// these bitmap assets should be defined in project.xml
+// <assets path="assets/myfont.fnt"/>
+// <assets path="assets/myfont.png"/>
+var fontString:String = Assets.getText("assets/myfont.fnt");
+var fontBmd:BitmapData = Assets.getBitmapData("assets/myfont.png");
 
-[Embed(source="font.fnt", mimeType="application/octet-stream")]
-public static final FontXml:Class;
-
-var texture:Texture = Texture.fromEmbeddedAsset(FontTexture);
-var xml:XML = XML(new FontXml());
+var texture:Texture = Texture.fromBitmapData(fontBmd);
+var xml:Xml = Xml.parse(fontString);
 var font:BitmapFont = new BitmapFont(texture, xml); // <1>
 
 TextField.registerCompositor(font, font.name); // <2>
