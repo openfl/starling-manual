@@ -92,7 +92,7 @@ class ColorOffsetFilter extends FragmentFilter
 
     private function get_colorOffsetEffect():ColorOffsetEffect
     {
-        return Std.downcast(effect, ColorOffsetEffect);
+        return cast(effect, ColorOffsetEffect);
     }
 
     public var redOffset(get, set):Float;
@@ -244,7 +244,7 @@ Let's look at the code:
 ----
 override private function createProgram():Program
 {
-    var vertexShader:String = STD_VERTEX_SHADER;
+    var vertexShader:String = FilterEffect.STD_VERTEX_SHADER;
     var fragmentShader:String =
         "tex ft0, v0, fs0 <2d, linear> \n" +
         "add oc, ft0, fc0";
@@ -304,7 +304,7 @@ To be sure the code works for every texture, let's use a helper method to write 
 
 [source, haxe]
 ----
-tex("ft0", "v0", 0, this.texture)
+FilterEffect.tex("ft0", "v0", 0, this.texture)
 ----
 
 That does just the same (the method returns an AGAL string), but we don't need to care about the options any longer.
@@ -382,7 +382,7 @@ Here's one way to do that:
 
 [source, haxe]
 ----
-tex("ft0", "v0", 0, texture)   // get color from texture
+FilterEffect.tex("ft0", "v0", 0, texture)   // get color from texture
 mov ft1, fc0                   // copy complete offset to ft1
 mul ft1.xyz, fc0.xyz, ft0.www  // multiply offset.rgb with alpha (pma!)
 add  oc, ft0, ft1              // add offset, copy to output

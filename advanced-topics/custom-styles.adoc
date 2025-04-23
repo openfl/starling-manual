@@ -377,7 +377,7 @@ override private function createProgram():Program
     ].join("\n");
 
     var fragmentShader:String = [
-        tex("ft0", "v0", 0, texture) +  // get color from texture
+        FilterEffect.tex("ft0", "v0", 0, texture) +  // get color from texture
         "mul ft0, ft0, v1",             // multiply color with texel color
         "mov ft1, v2",                  // copy complete offset to ft1
         "mul ft1.xyz, v2.xyz, ft0.www", // multiply offset.rgb with alpha (pma!)
