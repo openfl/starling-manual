@@ -89,7 +89,7 @@ var inside:Float = MathUtil.clamp(-5, 1, 10); // <1>
 
 Now that we touched the topic of temporary objects, it's the perfect time to introduce you to the _Pool_ class.
 
-Experienced AS3 developers know that any object allocation comes at a price: the object needs to be garbage collected later.
+Experienced Haxe developers know that any object allocation comes at a price: the object needs to be garbage collected later.
 This happens completely behind the scenes; you won't even notice it most of the time.
 
 However, when the cleanup process takes up too much time, your app will freeze for a short moment.

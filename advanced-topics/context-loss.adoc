@@ -28,18 +28,17 @@ When Starling recognizes that the current render context has been lost, it initi
 
 Restoring buffers and programs is not problematic; Starling has all data that's required and it doesn't take much time.
 Textures, however, are a headache.
-To illustrate that, let's look at the worst case example: a texture created from an embedded bitmap.
+To illustrate that, let's look at the worst case example: a texture created from a bitmap asset.
 
 [source, haxe]
 ----
-[Embed(source="hero.png")]
-public static final Hero:Class;
-
-var bitmap:Bitmap = new Hero();
-var texture:Texture = Texture.fromBitmap(bitmap);
+// this bitmap asset should be defined in project.xml
+// <assets path="assets/hero.png"/>
+var bitmapData:BitmapData = Assets.getBitmapData("assets/hero.png");
+var texture:Texture = Texture.fromBitmapData(bitmap);
 ----
 
-The moment you call `Texture.fromBitmap`, the bitmap is uploaded to GPU memory, which means it's now part of the context.
+The moment you call `Texture.fromBitmapData`, the bitmap is uploaded to GPU memory, which means it's now part of the context.
 If we could rely on the context staying alive forever, we'd be done now.
 
 However, we _cannot_ rely on that: the texture data could be lost anytime.
@@ -48,28 +47,16 @@ When the worst happens, it will use it to recreate the texture.
 All of that happens behind the scenes.
 
 Lo and behold!
-That means that the texture is in memory three times.
+That means that the texture is in memory twice.
 
-* The "Hero" class (conventional memory)
-* The backup bitmap (conventional memory)
+* The bitmap data (conventional memory)
 * The texture (graphics memory)
 
 Given the tight memory constraints we're facing on mobile, this is a catastrophe.
 You don't want this to happen!
 
-It becomes a little better if you change your code slightly:
-
-[source, haxe]
-----
-// use the 'fromEmbeddedAsset' method instead
-var texture:Texture = Texture.fromEmbeddedAsset(Hero);
-----
-
-That way, Starling can recreate the texture directly from the embedded class (calling `new Hero()`), which means that the texture is in memory only two times.
-For embedded assets, that's your best bet.
-
 Ideally, though, we want to have the texture in memory only once.
-For this to happen, you must not embed the asset; instead, you need to load it from an URL that points to a local or remote file.
+For this to happen, you must not preload the bitmap asset; instead, you need to load it from an URL that points to a local or remote file.
 That way, only the URL needs to be stored; the actual data can then be reloaded from the original location.
 
 There are two ways to make this happen:
@@ -85,18 +72,22 @@ Who knows -- you might run into a situation where a manual restoration is your o
 
 === Manual Restoration
 
-You might wonder how `Texture.fromEmbeddedAsset()` works internally.
-Let's look at a possible implementation of that method:
+Let's look at a possible implementation of a method that creates a texture from a BitmapData asset:
 
 [source, haxe]
 ----
-public static function fromEmbeddedAsset(assetClass:Class):Texture
+public static function textureFromAsset(assetID:String):Texture
 {
-    var texture:Texture = Texture.fromBitmap(new assetClass());
+    var bitmapData:BitmapData = Assets.getBitmapData(assetID);
+    var texture:Texture = Texture.empty(bitmapData.width, bitmapData.height);
+    texture.root.uploadBitmapData(bitmapData);
+
     texture.root.onRestore = function():Void
     {
-        texture.root.uploadFromBitmap(new assetClass());
+        var bitmapData:BitmapData = Assets.getBitmapData(assetID);
+        texture.root.uploadFromBitmap(bitmapData);
     };
+
     return texture;
 }
 ----
@@ -106,46 +97,49 @@ Wait a minute: what's `root`?
 
 You might not know it, but when you've got a _Texture_ instance, that's actually often not a concrete texture at all.
 In reality, it might be just a pointer to a part of another texture (a _SubTexture_).
-Even the `fromBitmap` call could return such a texture!
+Even a `fromBitmap` call could return such a texture!
 (Explaining the reasoning behind that would be beyond the scope of this chapter, though.)
 
 In any case, `texture.root` will always return the _ConcreteTexture_ object, and that's where the `onRestore` callback is found.
 This callback will be executed directly after a context loss, and it gives you the chance of recreating your texture.
 
-In our case, that callback simply instantiates the bitmap once again and uploads it to the root texture.
+In our case, that callback simply uploads the bitmap again to the root texture.
 Voilà, the texture is restored!
 
 The devil lies in the details, though.
-You have to construct your `onRestore`-callback very carefully to be sure not to store another bitmap copy without knowing it.
+You should construct a custom `onRestore`-callback very carefully to be sure not to store another bitmap copy without knowing it.
 Here's one innocent looking example that's actually totally useless:
 
 [source, haxe]
 ----
-public static function fromEmbeddedAsset(assetClass:Class):Texture
+public static function textureFromAsset(assetID:String):Texture
 {
     // DO NOT use this code! BAD example.
 
-    var bitmap:Bitmap = new assetClass();
-    var texture:Texture = Texture.fromBitmap(bitmap);
+    var bitmapData:BitmapData = Assets.getBitmapData(assetID);
+    var texture:Texture = Texture.empty(bitmapData.width, bitmapData.height);
+    texture.root.uploadBitmapData(bitmapData);
+
     texture.root.onRestore = function():Void
     {
-        texture.root.uploadFromBitmap(bitmap);
+        texture.root.uploadFromBitmap(bitmapData);
     };
+
     return texture;
 }
 ----
 
 Can you spot the error?
 
-The problem is that the method creates a _Bitmap_ object and uses it in the callback.
+The problem is that the method creates a _BitmapData_ object and uses it in the callback.
 That callback is actually a so-called _closure_; that's an inline function that will be stored together with some of the variables that accompany it.
 In other words, you've got a function object that stays in memory, ready to be called when the context is lost.
 And the bitmap instance is stored inside it, even though you never explicitly said so.
-(Well, in fact you did, by using `bitmap` inside the callback.)
+(Well, in fact you did, by using `bitmapData` inside the callback.)
 
 In the original code, the bitmap is not referenced, but _created_ inside the callback.
-Thus, there is no `bitmap` instance to be stored with the closure.
-Only the `assetClass` object is referenced in the callback -- and that is in memory, anyway.
+Thus, there is no `bitmapData` instance to be stored with the closure.
+Only the `assetID` string is referenced in the callback -- and that is in memory, anyway.
 
 That technique works in all kinds of scenarios:
 

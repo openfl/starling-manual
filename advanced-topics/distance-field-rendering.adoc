@@ -142,14 +142,14 @@ As a result, Starling is able to set everything up for you automatically.
 
 [source, haxe]
 ----
-[Embed(source="arial.fnt", mimeType="application/octet-stream")]
-public static final FontXml:Class;
+// these bitmap assets should be defined in project.xml
+// <assets path="assets/arial.png"/>
+// <assets path="assets/arial.fnt"/>
+var fontBmd:BitmapData = Assets.getBitmapData("assets/arial.png");
+var fontString:String = Assets.getText("assets/arial.fnt");
 
-[Embed(source="arial.png")]
-public static final FontTexture:Class;
-
-var texture:Texture = Texture.fromEmbeddedAsset(FontTexture);
-var xml:XML = XML(new FontXml());
+var texture:Texture = Texture.fromBitampData(fontBmd);
+var xml:Xml = Xml.parse(fontString);
 var font:BitmapFont = new BitmapFont(texture, xml)
 TextField.registerCompositor(font, font.name);
 

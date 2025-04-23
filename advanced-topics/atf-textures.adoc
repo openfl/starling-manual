@@ -3,7 +3,7 @@ ifndef::imagesdir[:imagesdir: ../img]
 
 In conventional OpenFL, most developers use the _PNG_ format for their images, or _JPG_ if they don't need transparency.
 Those are very popular in Starling, too.
-However, _Stage3D_ offers an alternative that has several unique advantages: the _Adobe Texture Format_, which can store _compressed_ textures.
+However, _Stage3D_ offers an alternative that has several unique advantages: the _Adobe Texture Format_ (or _ATF_), which can store _compressed_ textures.
 
 * Compressed textures require just a fraction of their conventional counterparts.
 * Decompression is done directly on the GPU.
@@ -52,7 +52,7 @@ In other words: depending on where your game is running, it will need a differen
 How should you know beforehand which file to include?
 
 This is where ATF comes to the rescue.
-It is a format that Adobe created especially for _Stage3D_; actually, it is a container file that can include up to four different versions of a texture.
+It is a format that was created especially for _Stage3D_; actually, it is a container file that can include up to four different versions of a texture.
 
 * *PVRTC* (PowerVR Texture Compression) is used in PowerVR GPUs. It is supported by all generations of the iPhone, iPod Touch, and iPad.
 * *DXT1/5* (S3 Texture Compression) was originally developed by S3 Graphics. It is now supported by both Nvidia and AMD GPUs, and is thus available on most desktop computers, as well as some Android phones.
@@ -81,8 +81,8 @@ ETC1 actually does not support an alpha channel, but Stage3D works around this b
 
 === Creating an ATF texture
 
-Adobe provides a set of command line tools to convert to and from ATF and to preview the generated files.
-They are part of the https://airsdk.harman.com[AIR SDK] (look for the `atftools` folder).
+There is a set of command line tools to convert to and from ATF and to preview the generated files.
+They are part of the https://airsdk.harman.com[Adobe AIR SDK] (look for the `atftools` folder).
 
 Probably the most important tool is `png2atf`.
 Here is a basic usage example; it will compress the texture with the standard settings in all available formats.
@@ -181,21 +181,24 @@ Parameters two and three control the scale factor and if mipmaps should be used,
 The fourth one, if passed a callback, will trigger asynchronous loading: Starling will be able to continue rendering undisturbed while that happens.
 As soon as the callback has been executed (but not any sooner!), the texture will be usable.
 
-Of course, you can also embed the ATF file directly in the AS3 source.
+Of course, you can also include the ATF file as an asset in your Lime _project.xml_ configuration file.
+
+[source, xml]
+----
+<assets path="assets/texture.atf"/>
+----
+
+Use the _Assets.getBytes()_ method to get the bytes.
 
 [source, haxe]
 ----
-[Embed(source="texture.atf", mimeType="application/octet-stream")]
-public static final CompressedData:Class;
-
-var texture:Texture = Texture.fromEmbeddedAsset(CompressedData);
+var atfData:ByteArray = Assets.getBytes("assets/texture.atf");
+var texture:Texture = Texture.fromATFData(atfData);
 ----
-
-Note, however, that asynchronous upload is not available in this case.
 
 === Other Resources
 
 You can find out more about this topic in the following sources:
 
-* https://www.adobe.com/devnet/archive/flashruntimes/articles/introducing-compressed-textures.html[Introducing Compressed Textures]
-* https://www.adobe.com/devnet/archive/flashruntimes/articles/atf-users-guide.html[ATF Tools User's Guide]
+* https://web.archive.org/web/20200522055322/https://www.adobe.com/devnet/archive/flashruntimes/articles/introducing-compressed-textures.html[Adobe Devnet: Introducing Compressed Textures]
+* https://web.archive.org/web/20200522055340/https://www.adobe.com/devnet/archive/flashruntimes/articles/atf-users-guide.html[Adobe Devnet: ATF Tools User's Guide]

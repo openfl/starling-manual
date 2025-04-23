@@ -113,26 +113,20 @@ So you won't create a memory leak.
 
 NOTE: In previous Starling versions (< 2.0), this _did_ create a memory leak.
 
-=== Do not Embed Textures
+=== Load Textures On Demand
 
-ActionScript developers have always been used to embedding their bitmaps directly into the SWF file, using `Embed` metadata.
-This is great for the web, because it allows you to combine all your game's data into one file.
-
-We already saw in the link:context-loss.adoc[Context Loss] section that this approach has some serious downsides in Starling (or Stage3D in general).
-It comes down to this: the texture will be in memory at least two times: once in conventional memory, once in graphics memory.
+We already saw in the link:context-loss.adoc[Context Loss] section that storing many bitmaps in memory for textures has some serious downsides in Starling (or Stage3D in general).
+It comes down to this: each texture will be in memory at least two times: once in conventional memory, once in GPU memory.
 
 [source, haxe]
 ----
-[Embed(source="assets/textures/hero.png")]
-private static var Hero:Class; // <1>
-
-var texture:Texture = Texture.fromEmbeddedAsset(Hero); // <2>
+// this bitmap asset should be defined in project.xml
+// <assets path="assets/hero.png"/>
+var bitmapData:BitmapData = Assets.getBitmapData("assets/hero.png"); // <1>
+var texture:Texture = Texture.fromBitmapData(Hero); // <2>
 ----
 <1> The class is stored in conventional memory.
 <2> The texture is stored in graphics memory.
-
-Note that this sample uses `Texture.fromEmbeddedAsset` to load the texture.
-For reasons discussed in link:context-loss.adoc[Context Loss], the alternative (`Texture.fromBitmap`) uses even more memory.
 
 The only way to guarantee that the texture is really only stored in graphics memory is by loading it from an URL.
 If you use the _AssetManager_ for this task, that's not even a lot of work.

@@ -207,11 +207,11 @@ This method is supposed to create the actual Stage3D shader code.
 [NOTE]
 ====
 I'll show you the basics, but explaining _Stage3D_ thoroughly is beyond the scope of this manual.
-To get deeper into the topic, you can always have a look at one of the following tutorials:
+To get deeper into the topic, you can always have a look at one of the following tutorials (they're for Flash and ActionScript 3.0, but they are helpful for OpenFL and Haxe too):
 
   * https://jacksondunstan.com/articles/1661[Introduction to AGAL]
   * https://help.adobe.com/en_US/as3/dev/WSd6a006f2eb1dc31e-310b95831324724ec56-8000.html[List of AGAL operations]
-  * https://web.archive.org/web/20190702055247/http://www.adobe.com/devnet/flashplayer/articles/how-stage3d-works.html[How Stage3D works]
+  * https://web.archive.org/web/20190702055247/http://www.adobe.com/devnet/flashplayer/articles/how-stage3d-works.html[Adobe Devnet: How Stage3D works]
 ====
 
 All Stage3D rendering is done through vertex- and fragment-shaders.
@@ -395,7 +395,7 @@ The `tex` method makes sure that we always receive the value with PMA, so no nee
 
 ==== Second Try
 
-When you give the filter another try now (complete code: https://git.io/v9Oti[ColorOffsetFilter.as]), you'll see correct alpha values:
+When you give the filter another try now (complete code: https://gist.github.com/joshtynjala/974f6f3f49bad9a788e8a7f252d77e5f[ColorOffsetFilter.hx]), you'll see correct alpha values:
 
 .That's more like it!
 image::customfilter-pma-solved.png[Custom Filter with solved PMA issue, pdfwidth='7cm']

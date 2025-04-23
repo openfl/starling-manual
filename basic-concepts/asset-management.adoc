@@ -107,21 +107,21 @@ class EmbeddedAssets
 {
     /* PNG texture */
     [Embed(source = "/textures/bird.png")]
-    public static final bird:Class;
+    public static final bird:Class<Dynamic>;
 
     /* ATF texture */
     [Embed(source   = "textures/1x/atlas.atf",
            mimeType = "application/octet-stream")]
-    public static final atlas:Class;
+    public static final atlas:Class<Dynamic>;
 
     /* XML file */
     [Embed(source   = "textures/1x/atlas.xml",
            mimeType = "application/octet-stream")]
-    public static final atlas_xml:Class;
+    public static final atlas_xml:Class<Dynamic>;
 
     /* MP3 sound */
     [Embed(source = "/audio/explosion.mp3")]
-    public static final explosion:Class;
+    public static final explosion:Class<Dynamic>;
 }
 ----
 
